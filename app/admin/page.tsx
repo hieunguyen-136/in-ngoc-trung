@@ -4,6 +4,8 @@ import { useState, FormEvent } from 'react'
 import { PRODUCTS } from '@/lib/data'
 import { CATEGORIES, formatVND } from '@/lib/types'
 
+type AdminView = 'dashboard' | 'categories'
+
 /* ─────────────────────────────────────────────
    Login View
 ───────────────────────────────────────────── */
@@ -215,13 +217,79 @@ function ProductTable() {
 }
 
 /* ─────────────────────────────────────────────
+   Categories View
+───────────────────────────────────────────── */
+function CategoriesView() {
+  const cats = CATEGORIES.filter((c) => c !== 'Tất cả')
+  return (
+    <div className="bg-white rounded-2xl shadow-card overflow-hidden">
+      <table className="w-full">
+        <thead>
+          <tr className="bg-gray-50 border-b border-gray-100">
+            <th scope="col" className="text-left text-[11px] uppercase tracking-[0.1em] text-gray-400 px-6 py-3">
+              Danh mục
+            </th>
+            <th scope="col" className="text-left text-[11px] uppercase tracking-[0.1em] text-gray-400 px-6 py-3">
+              Số sản phẩm
+            </th>
+            <th scope="col" className="text-left text-[11px] uppercase tracking-[0.1em] text-gray-400 px-6 py-3">
+              Còn hàng
+            </th>
+            <th scope="col" className="text-left text-[11px] uppercase tracking-[0.1em] text-gray-400 px-6 py-3">
+              Hết hàng
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {cats.map((cat) => {
+            const products = PRODUCTS.filter((p) => p.cat === cat)
+            const inStock = products.filter((p) => p.status === 'in').length
+            const outOfStock = products.filter((p) => p.status === 'out').length
+            return (
+              <tr key={cat} className="border-b border-gray-50 hover:bg-pink-50/30 transition-colors">
+                <td className="px-6 py-4">
+                  <span className="bg-pink-100 text-pink-700 text-xs rounded-full px-3 py-1 font-medium">
+                    {cat}
+                  </span>
+                </td>
+                <td className="px-6 py-4 text-sm text-gray-700 font-medium">{products.length}</td>
+                <td className="px-6 py-4">
+                  <span className="inline-flex items-center gap-1.5 text-green-700 text-xs">
+                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+                    {inStock}
+                  </span>
+                </td>
+                <td className="px-6 py-4">
+                  <span className="inline-flex items-center gap-1.5 text-red-700 text-xs">
+                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
+                    {outOfStock}
+                  </span>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+/* ─────────────────────────────────────────────
    Dashboard View
 ───────────────────────────────────────────── */
 function DashboardView({ onLogout }: { onLogout: () => void }) {
+  const [view, setView] = useState<AdminView>('dashboard')
+
   const totalProducts = PRODUCTS.length
   const outOfStock = PRODUCTS.filter((p) => p.status === 'out').length
-  // CATEGORIES includes "Tất cả" at index 0, so subtract 1
   const categoryCount = CATEGORIES.length - 1
+
+  const navItems: { id: AdminView; icon: string; label: string }[] = [
+    { id: 'dashboard', icon: '📊', label: 'Dashboard' },
+    { id: 'categories', icon: '🏷️', label: 'Danh mục' },
+  ]
+
+  const pageTitle = view === 'dashboard' ? 'Dashboard' : 'Danh mục'
 
   return (
     <div className="flex h-screen">
@@ -235,21 +303,22 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 px-4 py-4 space-y-1">
-          <a
-            href="/admin"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-pink-50 text-pink-700 text-sm font-medium"
-          >
-            <span>📊</span>
-            <span>Dashboard</span>
-          </a>
-          <a
-            href="/admin/products"
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-gray-900 text-sm transition-colors"
-          >
-            <span>💍</span>
-            <span>Sản phẩm</span>
-          </a>
+        <nav className="flex-1 px-4 py-4 space-y-1" aria-label="Admin navigation">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setView(item.id)}
+              aria-current={view === item.id ? 'page' : undefined}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                view === item.id
+                  ? 'bg-pink-50 text-pink-700'
+                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+              }`}
+            >
+              <span aria-hidden="true">{item.icon}</span>
+              <span>{item.label}</span>
+            </button>
+          ))}
         </nav>
 
         {/* Bottom: user + logout */}
@@ -271,43 +340,49 @@ function DashboardView({ onLogout }: { onLogout: () => void }) {
       <div className="flex-1 bg-gray-50 min-h-screen overflow-auto">
         {/* Top bar */}
         <div className="bg-white border-b border-gray-100 px-8 py-4">
-          <h1 className="text-gray-800 font-medium text-lg">Dashboard</h1>
+          <h1 className="text-gray-800 font-medium text-lg">{pageTitle}</h1>
         </div>
 
         {/* Page body */}
         <div className="px-8 py-8 space-y-8">
-          {/* Stat cards */}
-          <div className="grid grid-cols-3 gap-6">
-            <div className="bg-white border border-pink-100 rounded-2xl p-6 shadow-card">
-              <p className="text-[12px] uppercase tracking-[0.15em] text-gray-400 mb-2">
-                Tổng sản phẩm
-              </p>
-              <p className="font-display text-[48px] font-[300] text-gray-900 leading-none">
-                {totalProducts}
-              </p>
-            </div>
+          {view === 'dashboard' && (
+            <>
+              {/* Stat cards */}
+              <div className="grid grid-cols-3 gap-6">
+                <div className="bg-white border border-pink-100 rounded-2xl p-6 shadow-card">
+                  <p className="text-[12px] uppercase tracking-[0.15em] text-gray-400 mb-2">
+                    Tổng sản phẩm
+                  </p>
+                  <p className="font-display text-[48px] font-[300] text-gray-900 leading-none">
+                    {totalProducts}
+                  </p>
+                </div>
 
-            <div className="bg-white border border-pink-100 rounded-2xl p-6 shadow-card">
-              <p className="text-[12px] uppercase tracking-[0.15em] text-gray-400 mb-2">
-                Hết hàng
-              </p>
-              <p className="font-display text-[48px] font-[300] text-gray-900 leading-none">
-                {outOfStock}
-              </p>
-            </div>
+                <div className="bg-white border border-pink-100 rounded-2xl p-6 shadow-card">
+                  <p className="text-[12px] uppercase tracking-[0.15em] text-gray-400 mb-2">
+                    Hết hàng
+                  </p>
+                  <p className="font-display text-[48px] font-[300] text-gray-900 leading-none">
+                    {outOfStock}
+                  </p>
+                </div>
 
-            <div className="bg-white border border-pink-100 rounded-2xl p-6 shadow-card">
-              <p className="text-[12px] uppercase tracking-[0.15em] text-gray-400 mb-2">
-                Danh mục
-              </p>
-              <p className="font-display text-[48px] font-[300] text-gray-900 leading-none">
-                {categoryCount}
-              </p>
-            </div>
-          </div>
+                <div className="bg-white border border-pink-100 rounded-2xl p-6 shadow-card">
+                  <p className="text-[12px] uppercase tracking-[0.15em] text-gray-400 mb-2">
+                    Danh mục
+                  </p>
+                  <p className="font-display text-[48px] font-[300] text-gray-900 leading-none">
+                    {categoryCount}
+                  </p>
+                </div>
+              </div>
 
-          {/* Product table */}
-          <ProductTable />
+              {/* Product table */}
+              <ProductTable />
+            </>
+          )}
+
+          {view === 'categories' && <CategoriesView />}
         </div>
       </div>
     </div>
