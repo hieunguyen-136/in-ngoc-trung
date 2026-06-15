@@ -30,7 +30,7 @@ export function messengerUrl(): string {
   return `https://m.me/${CONTACT.messenger}/`
 }
 export function zaloUrl(): string {
-  return `https://zalo.me/${CONTACT.zalo}`
+  return `https://zalo.me/${CONTACT.zalo}/`
 }
 export function telUrl(): string {
   return `tel:${CONTACT.phone}`
