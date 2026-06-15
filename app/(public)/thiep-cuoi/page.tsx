@@ -46,12 +46,13 @@ export default function ThiepCuoiPage() {
 
       {/* Filter Chips */}
       <div className="flex flex-wrap justify-center gap-2 px-4 pb-10">
-        {[...CATEGORIES].map((cat) => {
+        {CATEGORIES.map((cat) => {
           const isActive = cat === activeCategory
           return (
             <button
               key={cat}
               onClick={() => handleCategoryChange(cat)}
+              aria-pressed={activeCategory === cat}
               className={
                 isActive
                   ? 'h-[36px] px-5 rounded-full text-[13.5px] font-medium text-white transition-all'
@@ -59,7 +60,7 @@ export default function ThiepCuoiPage() {
               }
               style={
                 isActive
-                  ? { background: 'linear-gradient(135deg, #f472b6, #ec4899)' }
+                  ? { background: 'linear-gradient(135deg, var(--color-pink-400), var(--color-pink-500))' }
                   : undefined
               }
             >
@@ -76,11 +77,11 @@ export default function ThiepCuoiPage() {
             <Link
               key={product.code}
               href={`/thiep-cuoi/${product.code}`}
-              className="group block rounded-2xl border border-pink-100 hover:border-pink-300 transition-all duration-200 hover:-translate-y-1 hover:shadow-[var(--shadow-hover)] bg-white overflow-hidden"
+              className="group block rounded-2xl border border-pink-100 hover:border-pink-300 transition-all duration-200 hover:-translate-y-1 shadow-card hover:shadow-hover bg-white overflow-hidden"
             >
               {/* Image Placeholder */}
               <div className="aspect-[3/4] bg-pink-50 rounded-2xl flex items-center justify-center text-5xl text-pink-200 overflow-hidden relative">
-                💍
+                <span aria-hidden="true">💍</span>
                 {product.status === 'out' && (
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <span className="bg-white text-gray-700 text-xs font-medium px-3 py-1.5 rounded-full">
@@ -118,6 +119,7 @@ export default function ThiepCuoiPage() {
                 <button
                   key={page}
                   onClick={() => setCurrentPage(page)}
+                  aria-current={isCurrentPage ? 'page' : undefined}
                   className={
                     isCurrentPage
                       ? 'w-10 h-10 rounded-full text-white text-sm font-medium transition-all'
@@ -125,7 +127,7 @@ export default function ThiepCuoiPage() {
                   }
                   style={
                     isCurrentPage
-                      ? { background: 'linear-gradient(135deg, #f472b6, #ec4899)' }
+                      ? { background: 'linear-gradient(135deg, var(--color-pink-400), var(--color-pink-500))' }
                       : undefined
                   }
                 >
