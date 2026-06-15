@@ -20,8 +20,15 @@ function LoginView({
   password: string
   setPassword: (v: string) => void
 }) {
+  const [error, setError] = useState('')
+
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    if (!email.trim() || !password.trim()) {
+      setError('Vui lòng nhập email và mật khẩu.')
+      return
+    }
+    setError('')
     onLogin()
   }
 
@@ -49,7 +56,7 @@ function LoginView({
             </label>
             <input
               id="admin-email"
-              type="text"
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@inngoctrung.vn"
@@ -74,6 +81,13 @@ function LoginView({
               className="rounded-lg border border-gray-200 focus:ring-2 focus:ring-pink-400 focus:outline-none px-4 py-3 w-full text-gray-800 placeholder-gray-300"
             />
           </div>
+
+          {/* Inline error */}
+          {error && (
+            <p role="alert" className="text-red-500 text-sm">
+              {error}
+            </p>
+          )}
 
           {/* Submit */}
           <button
@@ -131,7 +145,7 @@ function ProductTable() {
               scope="col"
               className="text-left text-[11px] uppercase tracking-[0.1em] text-gray-400 px-4 py-3"
             >
-              {/* actions */}
+              <span className="sr-only">Hành động</span>
             </th>
           </tr>
         </thead>
@@ -172,12 +186,12 @@ function ProductTable() {
               <td className="px-4 py-3">
                 {product.status === 'in' ? (
                   <span className="inline-flex items-center gap-1.5 bg-green-50 text-green-700 text-xs rounded-full px-2.5 py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
+                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-green-500 inline-block" />
                     Còn hàng
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1.5 bg-red-50 text-red-700 text-xs rounded-full px-2.5 py-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
+                    <span aria-hidden="true" className="w-1.5 h-1.5 rounded-full bg-red-500 inline-block" />
                     Hết hàng
                   </span>
                 )}
@@ -320,5 +334,13 @@ export default function AdminPage() {
     )
   }
 
-  return <DashboardView onLogout={() => setIsLoggedIn(false)} />
+  return (
+    <DashboardView
+      onLogout={() => {
+        setIsLoggedIn(false)
+        setEmail('')
+        setPassword('')
+      }}
+    />
+  )
 }
