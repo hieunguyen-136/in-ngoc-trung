@@ -20,7 +20,7 @@ export function formatVND(n: number): string {
 }
 
 export const CONTACT = {
-  phone: process.env.NEXT_PUBLIC_PHONE ?? '0932743646',
+  phone: process.env.NEXT_PUBLIC_PHONE ?? '+842822113535',
   zalo:  process.env.NEXT_PUBLIC_ZALO_PHONE ?? '0932743646',
   messenger: process.env.NEXT_PUBLIC_MESSENGER_PAGE_ID ?? 'inngoctrung136',
   address: process.env.NEXT_PUBLIC_ADDRESS ?? '136 Lý Thái Tổ, Phường Bàn Cờ, Hồ Chí Minh',
