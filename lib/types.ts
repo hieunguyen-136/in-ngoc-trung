@@ -23,6 +23,7 @@ export const CONTACT = {
   phone: process.env.NEXT_PUBLIC_PHONE ?? '0909000000',
   zalo:  process.env.NEXT_PUBLIC_ZALO_PHONE ?? '0909000000',
   messenger: process.env.NEXT_PUBLIC_MESSENGER_PAGE_ID ?? 'inngoctrung',
+  address: process.env.NEXT_PUBLIC_ADDRESS ?? '123 Đường ABC, Phường XYZ, TP. Hồ Chí Minh',
 } as const
 
 export function messengerUrl(): string {

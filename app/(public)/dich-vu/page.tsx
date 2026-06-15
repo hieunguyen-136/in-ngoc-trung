@@ -12,7 +12,7 @@ const services = [
     name: 'Danh thiếp',
     desc: 'Thiết kế & in danh thiếp cao cấp, nhiều chất liệu lựa chọn',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <rect x="2" y="5" width="20" height="14" rx="2" />
         <line x1="2" y1="10" x2="22" y2="10" />
         <line x1="6" y1="15" x2="10" y2="15" />
@@ -24,7 +24,7 @@ const services = [
     name: 'Banner · Hiflex',
     desc: 'In banner, hiflex khổ lớn, màu sắc tươi sáng, bền bỉ',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <rect x="3" y="3" width="18" height="18" rx="2" />
         <circle cx="8.5" cy="8.5" r="1.5" />
         <polyline points="21 15 16 10 5 21" />
@@ -36,7 +36,7 @@ const services = [
     name: 'Catalogue · Tờ rơi',
     desc: 'In catalogue, tờ rơi, brochure chuyên nghiệp',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
         <polyline points="14 2 14 8 20 8" />
         <line x1="16" y1="13" x2="8" y2="13" />
@@ -50,7 +50,7 @@ const services = [
     name: 'Tem nhãn · Sticker',
     desc: 'Tem nhãn, sticker, decal theo yêu cầu',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
         <line x1="7" y1="7" x2="7.01" y2="7" />
       </svg>
@@ -61,7 +61,7 @@ const services = [
     name: 'Giftnail',
     desc: 'In ấn móng tay quà tặng độc đáo',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <polyline points="20 12 20 22 4 22 4 12" />
         <rect x="2" y="7" width="20" height="5" />
         <line x1="12" y1="22" x2="12" y2="7" />
@@ -75,7 +75,7 @@ const services = [
     name: 'Menu',
     desc: 'Thiết kế & in menu nhà hàng, café sang trọng',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <line x1="8" y1="6" x2="21" y2="6" />
         <line x1="8" y1="12" x2="21" y2="12" />
         <line x1="8" y1="18" x2="21" y2="18" />
@@ -90,7 +90,7 @@ const services = [
     name: 'Thiệp cưới',
     desc: 'Thiệp cưới cao cấp, nhiều mẫu đẹp, giao nhanh',
     icon: (
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <svg aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       </svg>
     ),

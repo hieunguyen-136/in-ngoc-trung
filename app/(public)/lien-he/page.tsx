@@ -42,7 +42,7 @@ export default function LienHePage() {
             <div>
               <p className="text-gray-400 text-[13px] mb-0.5">Địa chỉ</p>
               <p className="text-gray-700 text-[14.5px]">
-                123 Đường ABC, Phường XYZ, TP. Hồ Chí Minh
+                {CONTACT.address}
               </p>
             </div>
           </div>
@@ -132,6 +132,7 @@ export default function LienHePage() {
             width="100%"
             height="100%"
             style={{ border: 0, minHeight: '400px' }}
+            sandbox="allow-scripts allow-same-origin allow-fullscreen"
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
