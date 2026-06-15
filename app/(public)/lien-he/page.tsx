@@ -128,7 +128,7 @@ export default function LienHePage() {
         {/* Right column — Map */}
         <div className="bg-blush rounded-2xl overflow-hidden" style={{ minHeight: '400px' }}>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125425.1754614596!2d106.60980309179686!3d10.773374399999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529292e8d3dd1%3A0xf15f5aad773c2ee5!2zSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1234567890"
+            src="https://maps.google.com/maps?q=136+L%C3%BD+Th%C3%A1i+T%E1%BB%95%2C+Ph%C6%B0%E1%BB%9Dng+B%C3%A0n+C%E1%BB%9D%2C+Qu%E1%BA%ADn+3%2C+H%E1%BB%93+Ch%C3%AD+Minh&output=embed&hl=vi"
             width="100%"
             height="100%"
             style={{ border: 0, minHeight: '400px' }}
