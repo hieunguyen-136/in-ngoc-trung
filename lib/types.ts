@@ -27,7 +27,7 @@ export const CONTACT = {
 } as const
 
 export function messengerUrl(): string {
-  return `https://www.facebook.com/${CONTACT.messenger}/`
+  return `https://m.me/${CONTACT.messenger}/`
 }
 export function zaloUrl(): string {
   return `https://zalo.me/${CONTACT.zalo}`
